@@ -1,0 +1,19 @@
+{
+  "name": "catalogobackend",
+  "version": "1.0.0",
+  "description": "API del Proyecto Catalogo",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/LFernandoPaR/CatalogoBackend.git"
+  },
+  "author": "Luis Fernando Parada",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/LFernandoPaR/CatalogoBackend/issues"
+  },
+  "homepage": "https://github.com/LFernandoPaR/CatalogoBackend#readme"
+}
