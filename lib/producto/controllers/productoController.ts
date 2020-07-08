@@ -76,4 +76,60 @@ export class ProductoController {
             );
         })
     }
+
+    public obtenerProducto = (req: Request, res: Response) => {
+        Producto.find({})
+        .select('clave descripcion tipoProducto precioPublico unidadEntrada unidadSalida paridad')
+        .exec()
+        .then(productos => {
+            res.status(200).json({
+                ok: true,
+                productos
+            })
+        })
+        .catch(error => {
+            res.status(400).json(
+                {
+                    ok: false,
+                    error
+                }
+            )
+        });
+    }
+
+
+    public actualizarProducto = (req: Request, res: Response) => {
+        Producto.findByIdAndUpdate(req.params.id, req.body, {new: true, runValidators: true}, (err, productoActualizado) =>{
+            if(err) {
+                return res.status(400).json({
+                    ok: false,
+                    message: 'producto actualizado',
+                    error: err
+                });
+            }
+            res.status(200).json({
+                ok: true,
+                productoActualizado,
+                message: 'producto actualizado'
+            });
+        });
+    }
+
+
+    public eliminarProducto = (req: Request, res: Response) => {
+        Producto.findByIDAndRemove(req.params.id)
+        .then(eliminado => {
+            res.status(200).json({
+                ok: true,
+                message: 'producto eliminado'
+            });
+        })
+        .catch( err => {
+            return res.status(400).json({
+                ok: false,
+                message: 'producto no eliminado',
+                error: err
+            });
+        })
+    }
 }    
