@@ -44,4 +44,37 @@ export class UnidadController{
         });
     }
 
+    public actualizarUnidad = (req: Request, res: Response) => {
+        Unidad.findByIdAndUpdate(req.params.id, req.body, {new:true, runValidators: true}, (err, unidadActualizada) => {
+            if(err) {
+                return res.status(400).json({
+                    ok: false,
+                    message: 'Unidad no actualizada',
+                    error: err
+                });
+            }
+            res.status(200).json({
+                ok: true,
+                unidadActualizada,
+                message: 'Unidad Actualizada'
+            });
+        });
+    }
+
+    public eliminarUnidad = (req: Request, res: Response) => {
+        Unidad.findByIdAndRemove(req.params.id)
+        .then(eliminado => {
+            res.status(200).json({
+                ok: true,
+                message: 'Unidad eliminada'
+            });
+        })
+        .cath(err => {
+            return res.status(400).json({
+                ok: false,
+                message: 'Unidad no eliminada',
+                error: err
+            });
+        })
+    }
 }

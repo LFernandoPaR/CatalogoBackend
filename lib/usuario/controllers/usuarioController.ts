@@ -1,4 +1,4 @@
-import { Request } from 'express';
+import { Request, Response } from 'express';
 import Usuario from '../models/usuarioModels';
 import * as bcrypt from 'bcryptjs';
 import { Routes } from '../../routes';
@@ -37,7 +37,7 @@ export class UsuarioController {
 
     public obtenerUsuarios = (req: Request, res: Response) => {
         Usuario.find({})
-        .select('apellidoPaterno apellidoMaternonombre')
+        .select('apellidoPaterno apellidoMaterno nombre')
         .exec()
         .then(usuarios => {
             res.status(200).json({
